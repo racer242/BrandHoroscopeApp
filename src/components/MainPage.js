@@ -56,7 +56,7 @@ class MainPage extends Component {
       bottomFinalHeight: 450,
       bottomHeight: 370,
 
-      screens: 3,
+      screens: 1,
       aboutPopup: false,
       compsPopup: false,
       policyPopup: false,
