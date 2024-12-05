@@ -42,6 +42,21 @@ let mainReducerController = (state = {}, action) => {
       };
     }
 
+    case "NEXT_MATCH_SELECTED": {
+      return {
+        ...state,
+        matchSelected: true,
+        screens: 3,
+      };
+    }
+
+    case "PRELOAD_COMPLETE": {
+      return {
+        ...state,
+        preloaded: true,
+      };
+    }
+
     default:
       return state;
   }

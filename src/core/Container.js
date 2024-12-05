@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import MainPage from "../components/MainPage.js";
+import Preloader from "../components/Preloader.js";
 
 class Container extends Component {
   constructor(props) {
@@ -35,8 +36,9 @@ class Container extends Component {
   render() {
     let children = [];
     children.push(this.props.children);
-
     children.push(<MainPage store={this.store} key="MainPage" />);
+    if (!this.state.preloaded)
+      children.push(<Preloader store={this.store} key="Preloader" />);
 
     return React.createElement("div", { id: "Container" }, children);
   }

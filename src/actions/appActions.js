@@ -99,3 +99,15 @@ export const userMatchSelected = () => {
     type: "USER_MATCH_SELECTED",
   };
 };
+
+export const nextMatchSelected = () => {
+  return {
+    type: "NEXT_MATCH_SELECTED",
+  };
+};
+
+export const preloadComplete = () => {
+  return {
+    type: "PRELOAD_COMPLETE",
+  };
+};

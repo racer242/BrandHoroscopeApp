@@ -28,6 +28,31 @@ body {
   padding: 0px;
 }
 
+::-webkit-scrollbar {
+  width: 14px;
+  height: 18px;
+}
+
+::-webkit-scrollbar-thumb {
+  height: 6px;
+  border: 4px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  background-color: rgba(255, 255, 255, 0.2);
+  -webkit-border-radius: 7px;
+  -webkit-box-shadow: inset -1px -1px 0px rgba(255, 255, 255, 0.05),
+    inset 1px 1px 0px rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
 h1 {
   font-family: "Forum";
 
@@ -60,7 +85,8 @@ h2 {
   padding: 0px;
 }
 
-p {
+p,
+li {
   font-family: "Raleway";
   font-style: normal;
   font-weight: 400;
@@ -70,6 +96,26 @@ p {
   color: #f5f1e7;
   margin: 0px;
   padding: 0px;
+}
+
+#Popup h1 {
+  color: #fff;
+}
+
+#Popup h2 {
+  color: #3290ff;
+  padding-top: 0px;
+  padding-bottom: 10px;
+  text-align: left;
+}
+
+#Popup p,
+#Popup li {
+  color: #fff;
+  text-align: left;
+  line-height: 140%;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 form {
@@ -303,6 +349,78 @@ input[type="date"]::-webkit-input-placeholder {
   width: 250px;
 }
 
+#Preloader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #03001b;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  transition: opacity 2s;
+}
+
+#Popup {
+  position: fixed;
+  display: block;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+#PopupContainer {
+  position: relative;
+  display: block;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #03001b;
+  border-radius: 30px;
+  width: calc(90vw - 40px);
+  max-height: 80vh;
+  padding-top: 55px;
+  padding-left: 45px;
+  padding-bottom: 45px;
+  padding-right: 28px;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+#PopupContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: top;
+  gap: 40px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: calc(80vh - 95px);
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.popup-close {
+  position: absolute;
+  display: block;
+  right: 8px;
+  top: 8px;
+  width: 5vw;
+  height: 5vw;
+  max-width: 20px;
+  max-height: 20px;
+}
+
+.space-top {
+  padding-top: 40px;
+}
+
 .light-button,
 .dark-button {
   position: relative;
@@ -398,6 +516,25 @@ input[type="date"]::-webkit-input-placeholder {
   opacity: 0.7;
 }
 
+.image-button {
+  cursor: pointer;
+}
+
+.image-button:hover,
+.image-button:active {
+  opacity: 0.7;
+}
+
+.close-button {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:active {
+  opacity: 0.7;
+}
+
 .site-logo {
   position: relative;
   display: block;
@@ -462,10 +599,25 @@ input[type="date"]::-webkit-input-placeholder {
   }
 }
 
+.copyright {
+  gap: 10px;
+  width: 800px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.copyright a {
+  width: 40%;
+}
+
+.copyright img {
+  width: 100%;
+}
+
 @media (max-width: 720px) {
   .bottom-menu {
     width: 500px;
-    gap: 20px;
+    gap: 10px;
     row-gap: 20px;
     flex-wrap: wrap;
   }
@@ -473,5 +625,14 @@ input[type="date"]::-webkit-input-placeholder {
   #PageBottomContent {
     padding-top: 40px;
     gap: 30px;
+  }
+
+  .copyright {
+    width: 450px;
+    gap: 10px;
+  }
+
+  #PageBox {
+    background-image: url("../images/bg_mob.png");
   }
 }

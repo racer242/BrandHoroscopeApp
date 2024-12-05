@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import smoothScrollTo from "smooth-scroll-to";
 import {
+  nextMatchSelected,
   userDateChanged,
   userDateSelected,
   userMatchSelected,
@@ -11,6 +12,11 @@ import { ReactComponent as VkIcon } from "../images/vk_icon.svg";
 import { ReactComponent as DownloadIcon } from "../images/download_icon.svg";
 import { ReactComponent as ArrowDown } from "../images/arrow_down.svg";
 import { ReactComponent as Heart } from "../images/heart.svg";
+import { ReactComponent as X } from "../images/x.svg";
+import Popup from "./Popup";
+import PolicyPopup from "./PolicyPopup";
+import CompsPopup from "./CompsPopup";
+import AboutPopup from "./AboutPopup";
 
 class MainPage extends Component {
   constructor(props) {
@@ -49,12 +55,29 @@ class MainPage extends Component {
       blockInnerHeight: 0,
       bottomFinalHeight: 450,
       bottomHeight: 370,
+
       screens: 3,
+      aboutPopup: false,
+      compsPopup: false,
+      policyPopup: false,
     };
 
     this.dateButton_clickHandler = this.dateButton_clickHandler.bind(this);
     this.dateChange_clickHandler = this.dateChange_clickHandler.bind(this);
     this.matchButton_clickHandler = this.matchButton_clickHandler.bind(this);
+    this.nextButton_clickHandler = this.nextButton_clickHandler.bind(this);
+
+    this.aboutButton_clickHandler = this.aboutButton_clickHandler.bind(this);
+    this.closeAboutPopup_clickHandler =
+      this.closeAboutPopup_clickHandler.bind(this);
+
+    this.compsButton_clickHandler = this.compsButton_clickHandler.bind(this);
+    this.closeCompsPopup_clickHandler =
+      this.closeCompsPopup_clickHandler.bind(this);
+
+    this.policyButton_clickHandler = this.policyButton_clickHandler.bind(this);
+    this.closePolicyPopup_clickHandler =
+      this.closePolicyPopup_clickHandler.bind(this);
 
     this.state = { ...this.state, ...this.updateBounds() };
   }
@@ -166,6 +189,38 @@ class MainPage extends Component {
     );
   }
 
+  nextButton_clickHandler(event) {
+    this.store.dispatch(nextMatchSelected());
+    setTimeout(
+      () => smoothScrollTo(this.state.blockHeight * 2, 500, this.ref.current),
+      200
+    );
+  }
+
+  aboutButton_clickHandler(event) {
+    this.setState({ ...this.state, aboutPopup: true });
+  }
+
+  closeAboutPopup_clickHandler(event) {
+    this.setState({ ...this.state, aboutPopup: false });
+  }
+
+  compsButton_clickHandler(event) {
+    this.setState({ ...this.state, compsPopup: true });
+  }
+
+  closeCompsPopup_clickHandler(event) {
+    this.setState({ ...this.state, compsPopup: false });
+  }
+
+  policyButton_clickHandler(event) {
+    this.setState({ ...this.state, policyPopup: true });
+  }
+
+  closePolicyPopup_clickHandler(event) {
+    this.setState({ ...this.state, policyPopup: false });
+  }
+
   render() {
     let children = [];
     children.push(this.props.children);
@@ -215,14 +270,24 @@ class MainPage extends Component {
               }}
             >
               <div id="PageTop">
-                <div className="dark-button">Что это?</div>
+                <div
+                  className="dark-button"
+                  onClick={this.aboutButton_clickHandler}
+                >
+                  Что это?
+                </div>
                 <div className="site-logo">
                   <div className="site-logo-image"></div>
                   <div className="site-logo-frame">
                     <div className="site-logo-frame-image spin"></div>
                   </div>
                 </div>
-                <div className="dark-button">Участники</div>
+                <div
+                  className="dark-button"
+                  onClick={this.compsButton_clickHandler}
+                >
+                  Участники
+                </div>
               </div>
               <div className="screen-block">
                 <img src={require("../images/screen1.png")}></img>
@@ -338,7 +403,7 @@ class MainPage extends Component {
                       <div className="row-group">
                         <img src="comps/ollivanders.svg" width="100%"></img>
                         <Heart width="80" />
-                        <img src="agency/sol.svg" width="100%"></img>
+                        <img src="agency/sol.png" width="100%"></img>
                       </div>
                       <p>
                         Максимально эмоциональный тандем, который всегда отлично
@@ -352,7 +417,7 @@ class MainPage extends Component {
                   <div className="screen-below">
                     <div
                       className="light-button"
-                      onClick={this.matchButton_clickHandler}
+                      onClick={this.nextButton_clickHandler}
                     >
                       Кто ещё
                       <br />
@@ -401,9 +466,12 @@ class MainPage extends Component {
                   >
                     Скачать стикерпак
                   </a>
-                  <a href="" className="link-button">
+                  <div
+                    className="link-button"
+                    onClick={this.policyButton_clickHandler}
+                  >
                     Конфиденциальность
-                  </a>
+                  </div>
                   <a
                     href="mailto:hello@brandhoroscope.ru"
                     target="_blank"
@@ -412,12 +480,30 @@ class MainPage extends Component {
                     hello@brandhoroscope.ru
                   </a>
                 </div>
-                <img src={require("../images/copyright.png")} width="500"></img>
+                <div className="row-group copyright">
+                  <a href="https://solcreative.ru/" className="image-button">
+                    <img src={require("../images/sol.png")}></img>
+                  </a>
+
+                  <X width={60} />
+                  <a href="https://wowow.digital/" className="image-button">
+                    <img src={require("../images/wowow.png")}></img>
+                  </a>
+                </div>
               </div>
             </div>
             {children}
           </div>
         </div>
+        {this.state.aboutPopup && (
+          <AboutPopup onClose={this.closeAboutPopup_clickHandler} />
+        )}
+        {this.state.compsPopup && (
+          <CompsPopup onClose={this.closeCompsPopup_clickHandler} />
+        )}
+        {this.state.policyPopup && (
+          <PolicyPopup onClose={this.closePolicyPopup_clickHandler} />
+        )}
       </div>
     );
   }
