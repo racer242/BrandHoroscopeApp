@@ -1,3 +1,9 @@
+export const unknownMatch = {
+  agency: "Unknown Agency",
+  comp: "Неизвестный бренд",
+  text: "Опять тебе не повезло, но будь уверен - это не система",
+};
+
 const matches = [
   {
     agency: "Grape",

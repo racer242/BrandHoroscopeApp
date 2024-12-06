@@ -1,3 +1,11 @@
+export const unknownAgency = {
+  name: "Unknown Agency",
+  link: "https://solcreative.ru/",
+  zodiac: "Козерог",
+  logo: "nologo.svg",
+  id: "unknown",
+};
+
 const agencies = [
   {
     name: "СОЛЬ",

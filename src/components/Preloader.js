@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { ReactComponent as X } from "../images/x.svg";
 import Preload from "react-preload";
 import { preloadComplete } from "../actions/appActions";
 

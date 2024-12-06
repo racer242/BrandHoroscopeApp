@@ -13,10 +13,12 @@ import { ReactComponent as DownloadIcon } from "../images/download_icon.svg";
 import { ReactComponent as ArrowDown } from "../images/arrow_down.svg";
 import { ReactComponent as Heart } from "../images/heart.svg";
 import { ReactComponent as X } from "../images/x.svg";
-import Popup from "./Popup";
 import PolicyPopup from "./PolicyPopup";
 import CompsPopup from "./CompsPopup";
 import AboutPopup from "./AboutPopup";
+import { unknownComp } from "../configuration/Comps";
+import { unknownMatch } from "../configuration/Matches";
+import { unknownAgency } from "../configuration/Agencies";
 
 class MainPage extends Component {
   constructor(props) {
@@ -60,6 +62,10 @@ class MainPage extends Component {
       aboutPopup: false,
       compsPopup: false,
       policyPopup: false,
+
+      userComp: unknownComp,
+      userMatch: unknownMatch,
+      userAgency: unknownAgency,
     };
 
     this.dateButton_clickHandler = this.dateButton_clickHandler.bind(this);
@@ -167,6 +173,11 @@ class MainPage extends Component {
   }
 
   dateChange_clickHandler(event) {
+    if (event.key === "Enter" || event.keyCode === 13) {
+      this.dateButton_clickHandler();
+      return;
+    }
+
     let date = new Date(event.target.value);
 
     if (
@@ -335,33 +346,34 @@ class MainPage extends Component {
               >
                 <div className="screen-block">
                   <img src={require("../images/screen2.png")}></img>
-                  <div className="screen-content" style={{ paddingTop: 0 }}>
+                  <div className="screen-content" style={{ top: "49%" }}>
                     <div className="screen-bounded">
                       <div className="screen-top">
                         <img
-                          src="comps/ollivanders.svg"
-                          width="100%"
-                          height="70"
+                          src={this.state.userComp.logo}
+                          style={{
+                            width: "100%",
+                            height: 100,
+                            objectFit: "contain",
+                            objectPosition: "center",
+                          }}
                         ></img>
                         <h2>
                           ты — <br />
-                          Ollivander's Wand Shop
+                          {this.state.userComp.name}
                         </h2>
-                        <p className="label">
-                          Магазин волшебных палочек Оливандера («Гарри Поттер и
-                          философский камень»)
-                        </p>
+                        <p
+                          className="label"
+                          dangerouslySetInnerHTML={{
+                            __html: this.state.userComp.comment,
+                          }}
+                        ></p>
                       </div>
-                      <p>
-                        Самый непредсказуемый и оттого такой притягательный!
-                        Если тебя захлёстывают эмоции, бываешь абсолютно
-                        несносным: стучишь кулаком по столу и иногда торопишься
-                        ставить точку там, где следовало бы поставить хотя бы
-                        запятую. Но сколько бы ты ни бил себя пяткой в грудь,
-                        доказывая что-то другим, самые близкие знают — внутри ты
-                        всё тот же, мягкий и тёплый. Поэтому ты всегда в их
-                        сердечках, в какой бы "обёртке" не предстал.
-                      </p>
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: this.state.userComp.text,
+                        }}
+                      ></p>
                     </div>
                   </div>
                   <div className="screen-below">
@@ -400,18 +412,40 @@ class MainPage extends Component {
                         <br />
                         агентство
                       </h2>
-                      <div className="row-group">
-                        <img src="comps/ollivanders.svg" width="100%"></img>
-                        <Heart width="80" />
-                        <img src="agency/sol.png" width="100%"></img>
+                      <div className="row-group" style={{ gap: 20 }}>
+                        <img
+                          src={this.state.userComp.logo}
+                          style={{
+                            maxWidth: "calc(50% - 45px)",
+                            height: 70,
+                            objectFit: "contain",
+                            objectPosition: "right",
+                          }}
+                        ></img>
+                        <Heart
+                          style={{
+                            flex: "0 0 30px",
+                            width: 30,
+                            height: 30,
+                            objectFit: "contain",
+                            objectPosition: "center",
+                          }}
+                        />
+                        <img
+                          src={this.state.userAgency.logo}
+                          style={{
+                            maxWidth: "calc(50% - 45px)",
+                            height: 70,
+                            objectFit: "contain",
+                            objectPosition: "left",
+                          }}
+                        ></img>
                       </div>
-                      <p>
-                        Максимально эмоциональный тандем, который всегда отлично
-                        выглядит. Для каждого брифа есть свой лук, для каждой
-                        креативной кампании — отдельная капсула. Любые идеи в
-                        этой паре клиент-агентство можно определить формулой
-                        «love it or hate it».
-                      </p>
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: this.state.userMatch.text,
+                        }}
+                      ></p>
                     </div>
                   </div>
                   <div className="screen-below">
