@@ -19,6 +19,7 @@ import AboutPopup from "./AboutPopup";
 import { unknownComp } from "../configuration/Comps";
 import { unknownMatch } from "../configuration/Matches";
 import { unknownAgency } from "../configuration/Agencies";
+import DateInput from "./DateInput";
 
 class MainPage extends Component {
   constructor(props) {
@@ -29,7 +30,6 @@ class MainPage extends Component {
 
     this.minDateStr = "1900-01-01";
     this.maxDateStr = "2024-12-31";
-
     this.minDate = new Date(this.minDateStr);
     this.maxDate = new Date(this.maxDateStr);
 
@@ -69,7 +69,9 @@ class MainPage extends Component {
     };
 
     this.dateButton_clickHandler = this.dateButton_clickHandler.bind(this);
-    this.dateChange_clickHandler = this.dateChange_clickHandler.bind(this);
+
+    this.date_changeHandler = this.date_changeHandler.bind(this);
+
     this.matchButton_clickHandler = this.matchButton_clickHandler.bind(this);
     this.nextButton_clickHandler = this.nextButton_clickHandler.bind(this);
 
@@ -172,19 +174,13 @@ class MainPage extends Component {
     );
   }
 
-  dateChange_clickHandler(event) {
-    if (event.key === "Enter" || event.keyCode === 13) {
-      this.dateButton_clickHandler();
-      return;
-    }
-
-    let date = new Date(event.target.value);
-
+  date_changeHandler(value) {
+    let date = new Date(value);
     if (
       date.getTime() >= this.minDate.getTime() &&
       date.getTime() <= this.maxDate.getTime()
     ) {
-      this.store.dispatch(userDateChanged(event.target.value));
+      this.store.dispatch(userDateChanged(value));
       return true;
     } else {
       this.store.dispatch(userDateChanged(null));
@@ -313,16 +309,13 @@ class MainPage extends Component {
 
                   <form>
                     <div className="input-container">
-                      <input
-                        type="date"
-                        placeholder="ДД.ММ.ГГГГ"
-                        min={this.minDateStr}
-                        max={this.maxDateStr}
-                        onKeyUp={this.dateChange_clickHandler}
-                      ></input>
-                      <p className="label">введите дату рождения</p>
+                      <DateInput
+                        min={this.minDate}
+                        max={this.maxDate}
+                        onChange={this.date_changeHandler}
+                      />
+                      <p className="label">введи дату рождения</p>
                     </div>
-
                     <button
                       className="light-button"
                       type="button"
@@ -479,7 +472,7 @@ class MainPage extends Component {
             >
               <div id="PageBottomContent">
                 <div className="row-group bottom-menu">
-                  <a
+                  {/* <a
                     href="https://2024.brandhoroscope.ru/"
                     target="_blank"
                     className="link-button"
@@ -492,7 +485,7 @@ class MainPage extends Component {
                     className="link-button"
                   >
                     Версия 2023 года
-                  </a>
+                  </a> */}
                   <a
                     href="https://2022.brandhoroscope.ru/"
                     target="_blank"

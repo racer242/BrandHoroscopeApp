@@ -148,11 +148,14 @@ form {
   text-edge: cap;
   text-transform: uppercase;
   color: #f5f1e7;
-  width: 100%;
+  /* width: 200px; */
   border: none;
   background: transparent;
   text-align: center;
   cursor: pointer;
+}
+.screen-block input::placeholder {
+  color: #f5f1e7;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator,

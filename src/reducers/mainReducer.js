@@ -7,8 +7,6 @@ var randomVal = 0;
 const getNext = (a) => {
   let l = a.length;
   let v = a[randomVal % l];
-  console.log("}{{{{{", l, v);
-
   randomVal++;
   return v;
 };
