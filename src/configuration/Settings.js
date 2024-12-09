@@ -32,4 +32,32 @@ const settings = {
   matches,
 };
 
+// let mchs =
+//   "xcopy /e/h/y /z/i /k /f ..\\publish_page\\publish.css ..\\app\\public\\\n\n";
+// for (const comp of comps) {
+//   let mts = matches.reduce((am, vm, im) => {
+//     if (vm.comp == comp.name) {
+//       let ags = agencies.reduce((aa, va, ia) => {
+//         if (va.name == vm.agency) {
+//           aa.push(va);
+//         }
+//         return aa;
+//       }, []);
+//       let ag = ags[0];
+
+//       am +=
+//         `xcopy /e/h/y /z/i /k /f ..\\publish_page\\matches\\comp\\agency\\index.html ..\\app\\public\\matches\\${comp.id}\\${ag.id}\\\n\n` +
+//         `call __replace.cmd "..\\app\\public\\matches\\${comp.id}\\${
+//           ag.id
+//         }\\index.html" "${vm.comp.replace("'", "''")}" "${vm.agency.replace(
+//           "'",
+//           "''"
+//         )}" "${vm.text}"\n\n`;
+//     }
+//     return am;
+//   }, "");
+//   mchs += mts + "\n\n\n";
+// }
+// console.log(mchs);
+
 export default settings;
