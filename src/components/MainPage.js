@@ -20,6 +20,7 @@ import { unknownComp } from "../configuration/Comps";
 import { unknownMatch } from "../configuration/Matches";
 import { unknownAgency } from "../configuration/Agencies";
 import DateInput from "./DateInput";
+import { downloadLink, getTgUrl, getVkUrl } from "../core/helpers";
 
 class MainPage extends Component {
   constructor(props) {
@@ -86,6 +87,11 @@ class MainPage extends Component {
     this.policyButton_clickHandler = this.policyButton_clickHandler.bind(this);
     this.closePolicyPopup_clickHandler =
       this.closePolicyPopup_clickHandler.bind(this);
+
+    this.tgButton_clickHandler = this.tgButton_clickHandler.bind(this);
+    this.vkButton_clickHandler = this.vkButton_clickHandler.bind(this);
+    this.downloadButton_clickHandler =
+      this.downloadButton_clickHandler.bind(this);
 
     this.state = { ...this.state, ...this.updateBounds() };
   }
@@ -228,6 +234,43 @@ class MainPage extends Component {
     this.setState({ ...this.state, policyPopup: false });
   }
 
+  tgButton_clickHandler(event) {
+    window.open(
+      getTgUrl(
+        this.state.rootURL +
+          "matches/" +
+          this.state.userComp.id +
+          "/" +
+          this.state.userAgency.id +
+          "/index.html"
+      ),
+      "_blank"
+    );
+  }
+  vkButton_clickHandler(event) {
+    window.open(
+      getVkUrl(
+        this.state.rootURL +
+          "matches/" +
+          this.state.userComp.id +
+          "/" +
+          this.state.userAgency.id +
+          "/index.html"
+      ),
+      "_blank"
+    );
+  }
+  downloadButton_clickHandler(event) {
+    downloadLink(
+      "matches/" +
+        this.state.userComp.id +
+        "/" +
+        this.state.userAgency.id +
+        "/og.jpg",
+      this.state.userComp.id + "-" + this.state.userAgency.id
+    );
+  }
+
   render() {
     let children = [];
     children.push(this.props.children);
@@ -307,7 +350,7 @@ class MainPage extends Component {
                     гороскопу?
                   </h1>
 
-                  <form>
+                  <div className="form">
                     <div className="input-container">
                       <DateInput
                         min={this.minDate}
@@ -324,7 +367,7 @@ class MainPage extends Component {
                     >
                       Узнать
                     </button>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>
@@ -456,9 +499,18 @@ class MainPage extends Component {
                   <img src={require("../images/bottom.png")}></img>
                   <div className="screen-below-final-content">
                     <div className="row-group">
-                      <TgIcon className="social-button" />
-                      <VkIcon className="social-button" />
-                      <DownloadIcon className="social-button" />
+                      <TgIcon
+                        className="social-button"
+                        onClick={this.tgButton_clickHandler}
+                      />
+                      <VkIcon
+                        className="social-button"
+                        onClick={this.vkButton_clickHandler}
+                      />
+                      <DownloadIcon
+                        className="social-button"
+                        onClick={this.downloadButton_clickHandler}
+                      />
                     </div>
                   </div>
                 </div>

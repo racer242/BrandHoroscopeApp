@@ -10,6 +10,8 @@ const settings = {
   isMobile: isMobile(),
   isLocal: isLocal(),
 
+  rootURL: "https://mediasmit.tmweb.ru/testpage/bh6/",
+
   zodiac: [
     { name: "Козерог", start: [1, 1], end: [20, 1] },
     { name: "Водолей", start: [21, 1], end: [19, 2] },
