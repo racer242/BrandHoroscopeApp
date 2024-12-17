@@ -32,6 +32,7 @@ const settings = {
   matches,
 };
 
+//For copy-paste to file set encoding - OEM
 // let mchs =
 //   "xcopy /e/h/y /z/i /k /f ..\\publish_page\\publish.css ..\\app\\public\\\n\n";
 // for (const comp of comps) {

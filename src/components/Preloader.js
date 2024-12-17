@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Preload from "react-preload";
 import { preloadComplete } from "../actions/appActions";
+import { ReactComponent as X } from "../images/x.svg";
+import { ReactComponent as Logo } from "../images/logo.svg";
 
 class Preloader extends Component {
   constructor(props) {
@@ -82,6 +84,7 @@ class Preloader extends Component {
 
   preloader_completeHandler(event) {
     console.log("Preload complete");
+    // return;
     setTimeout(() => {
       setTimeout(() => {
         this.store.dispatch(preloadComplete());
@@ -115,11 +118,29 @@ class Preloader extends Component {
           resolveOnError={true}
           mountChildren={true}
         />
-        <div className="site-logo">
-          <div className="site-logo-image"></div>
-          <div className="site-logo-frame">
-            <div className="site-logo-frame-image spin"></div>
+        <div className="preloader-logo">
+          <div className="preloader-logo-frame">
+            <div className="preloader-logo-scale zoom">
+              <img
+                src={require("../images/preload1.png")}
+                className="preloader-logo-frame-image spin-pl"
+              ></img>
+              <img
+                src={require("../images/preload2.png")}
+                className="preloader-logo-frame-image-1 spin-cw"
+              ></img>
+            </div>
           </div>
+          <Logo className="preloader-logo-image" />
+        </div>
+        <div className="row-group copyright">
+          <a href="https://solcreative.ru/" className="image-button">
+            <img src={require("../images/sol.png")}></img>
+          </a>
+          <X width={15} />
+          <a href="https://wowow.digital/" className="image-button">
+            <img src={require("../images/wowow.png")}></img>
+          </a>
         </div>
       </div>
     );

@@ -602,6 +602,48 @@ input[type="date"]::-webkit-input-placeholder {
     transform: rotate(360deg);
   }
 }
+.spin-pl {
+  -webkit-animation: spin 18s linear infinite normal;
+  -moz-animation: spin 18s linear infinite normal;
+  animation: spin 18s linear infinite normal;
+}
+.spin-cw {
+  -webkit-animation: spin 18s linear infinite reverse;
+  -moz-animation: spin 18s linear infinite reverse;
+  animation: spin 18s linear infinite reverse;
+}
+
+.zoom {
+  -webkit-animation: zoom 2s ease-in-out;
+  -moz-animation: zoom 2s ease-in-out;
+  animation: zoom 2s ease-in-out;
+}
+@-moz-keyframes zoom {
+  0% {
+    -moz-transform: scale(0);
+  }
+  100% {
+    -moz-transform: scale(1);
+  }
+}
+@-webkit-keyframes zoom {
+  0% {
+    -webkit-transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+  }
+}
+@keyframes zoom {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
 
 .copyright {
   gap: 10px;
@@ -616,6 +658,65 @@ input[type="date"]::-webkit-input-placeholder {
 
 .copyright img {
   width: 100%;
+}
+
+#Preloader .copyright {
+  position: absolute !important;
+  bottom: 20px;
+  /* right: 25px; */
+  gap: 10px;
+  width: 300px;
+  max-width: 90%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.preloader-logo {
+  position: relative;
+  display: block;
+  width: 130px;
+  height: 130px;
+}
+
+.preloader-logo-image {
+  position: absolute;
+  display: block;
+  width: 120px;
+  height: 120px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.preloader-logo-frame {
+  position: absolute;
+  display: block;
+  width: 1280px;
+  height: 1280px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.preloader-logo-scale {
+  position: absolute;
+  display: block;
+  width: 1280px;
+  height: 1280px;
+}
+
+.preloader-logo-frame-image {
+  position: absolute;
+  display: block;
+  width: 1280px;
+  height: 1280px;
+}
+
+.preloader-logo-frame-image-1 {
+  position: absolute;
+  display: block;
+  width: 1280px;
+  height: 1280px;
 }
 
 @media (max-width: 720px) {
