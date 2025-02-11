@@ -20,7 +20,7 @@ import { unknownComp } from "../configuration/Comps";
 import { unknownMatch } from "../configuration/Matches";
 import { unknownAgency } from "../configuration/Agencies";
 import DateInput from "./DateInput";
-import { downloadLink, getTgUrl, getVkUrl } from "../core/helpers";
+import { downloadLink, getTgUrl, getVkUrl, isMobile } from "../core/helpers";
 
 class MainPage extends Component {
   constructor(props) {
@@ -36,12 +36,12 @@ class MainPage extends Component {
 
     this.state = {
       desktopBounds: {
-        width: 1250,
-        height: 1080,
+        width: 1280, //1250,
+        height: 1080, //1080,
       },
       mobileBounds: {
-        width: 500,
-        height: 1180,
+        width: 470,
+        height: 1060, //1180,
       },
       pageBounds: {
         width: 0,
@@ -56,7 +56,7 @@ class MainPage extends Component {
       pageInnerHeight: 0,
       blockHeight: 0,
       blockInnerHeight: 0,
-      bottomFinalHeight: 450,
+      bottomFinalHeight: 370,
       bottomHeight: 370,
 
       screens: 1,
@@ -143,12 +143,15 @@ class MainPage extends Component {
 
       let pageBounds = this.state.pageBounds;
 
+      let mobileSize = false;
+
       if (width > this.state.switchToMobileWidth) {
         pageBounds.width = this.state.desktopBounds.width;
         pageBounds.height = this.state.desktopBounds.height;
       } else {
         pageBounds.width = this.state.mobileBounds.width;
         pageBounds.height = this.state.mobileBounds.height;
+        mobileSize = true;
       }
 
       let pageScale = Math.min(
@@ -166,6 +169,7 @@ class MainPage extends Component {
         pageWidth: width,
         blockHeight: height,
         blockInnerHeight: height / pageScale,
+        mobileSize,
       };
     } else {
       return null;
@@ -175,7 +179,8 @@ class MainPage extends Component {
   dateButton_clickHandler(event) {
     this.store.dispatch(userDateSelected());
     setTimeout(
-      () => smoothScrollTo(this.state.blockHeight, 500, this.ref.current),
+      () =>
+        smoothScrollTo(this.state.blockHeight * 1.23, 500, this.ref.current),
       200
     );
   }
@@ -197,7 +202,8 @@ class MainPage extends Component {
   matchButton_clickHandler(event) {
     this.store.dispatch(userMatchSelected());
     setTimeout(
-      () => smoothScrollTo(this.state.blockHeight * 2, 500, this.ref.current),
+      () =>
+        smoothScrollTo(this.state.blockHeight * 2.73, 500, this.ref.current),
       200
     );
   }
@@ -205,7 +211,8 @@ class MainPage extends Component {
   nextButton_clickHandler(event) {
     this.store.dispatch(nextMatchSelected());
     setTimeout(
-      () => smoothScrollTo(this.state.blockHeight * 2, 500, this.ref.current),
+      () =>
+        smoothScrollTo(this.state.blockHeight * 2.73, 500, this.ref.current),
       200
     );
   }
@@ -339,8 +346,30 @@ class MainPage extends Component {
                   Участники
                 </div>
               </div>
-              <div className="screen-block">
-                <img src={require("../images/screen1.png")}></img>
+              <div
+                className="screen-block"
+                style={
+                  this.state.mobileSize
+                    ? {
+                        marginTop: "10%",
+                        transform: "translate(-50%, -50%) scale(.9)",
+                      }
+                    : {
+                        marginTop: "5%",
+                        transform: "translate(-50%, -50%) scale(1.15)",
+                      }
+                }
+              >
+                {this.state.mobileSize ? (
+                  <img
+                    src={require("../images/screen1m.png")}
+                    style={{
+                      transform: "scale(1.4)",
+                    }}
+                  ></img>
+                ) : (
+                  <img src={require("../images/screen1.png")}></img>
+                )}
                 <div className="screen-content" style={{ paddingTop: 140 }}>
                   <h1>
                     кто ты
@@ -375,13 +404,30 @@ class MainPage extends Component {
               <div
                 id="Screen2"
                 className="screen"
-                style={{
-                  width: this.state.pageBounds.width,
-                  height: this.state.blockInnerHeight,
-                }}
+                style={
+                  this.state.mobileSize
+                    ? {
+                        width: this.state.pageBounds.width,
+                        height: this.state.blockInnerHeight * 1.5,
+                      }
+                    : {
+                        width: this.state.pageBounds.width,
+                        height: this.state.blockInnerHeight,
+                      }
+                }
               >
                 <div className="screen-block">
-                  <img src={require("../images/screen2.png")}></img>
+                  {this.state.mobileSize ? (
+                    <img
+                      src={require("../images/screen2m.png")}
+                      style={{
+                        transform: "scale(1.4)",
+                      }}
+                    ></img>
+                  ) : (
+                    <img src={require("../images/screen2.png")}></img>
+                  )}
+
                   <div className="screen-content" style={{ top: "49%" }}>
                     <div className="screen-bounded">
                       <div className="screen-top">
@@ -427,18 +473,56 @@ class MainPage extends Component {
               <div
                 id="Screen3"
                 className="screen"
-                style={{
-                  width: this.state.pageBounds.width,
-                  height:
-                    this.state.pageBounds.height + this.state.bottomFinalHeight,
-                }}
+                style={
+                  this.state.mobileSize
+                    ? {
+                        width: this.state.pageBounds.width,
+                        height:
+                          this.state.pageBounds.height * 1.5 +
+                          this.state.bottomFinalHeight,
+                      }
+                    : {
+                        width: this.state.pageBounds.width,
+                        height:
+                          this.state.pageBounds.height +
+                          this.state.bottomFinalHeight,
+                      }
+                }
               >
-                <div className="screen-block-final">
-                  <div className="screen-above" style={{ top: "2%" }}>
+                <div
+                  className="screen-block-final"
+                  style={
+                    this.state.mobileSize
+                      ? {
+                          marginTop: "40%",
+                          transform: "translate(-50%) scale(1.05)",
+                        }
+                      : {
+                          marginTop: "-2%",
+                          transform: "translate(-50%) scale(1.1)",
+                        }
+                  }
+                >
+                  <div
+                    className="screen-above"
+                    style={
+                      this.state.mobileSize ? { top: "-20%" } : { top: "8%" }
+                    }
+                  >
                     <ArrowDown height="100" />
                   </div>
 
-                  <img src={require("../images/screen3.png")}></img>
+                  {this.state.mobileSize ? (
+                    <img
+                      src={require("../images/screen3m.png")}
+                      style={{
+                        transform: "scale(1.4)",
+                      }}
+                    ></img>
+                  ) : (
+                    <img src={require("../images/screen3.png")}></img>
+                  )}
+
                   <div className="screen-content" style={{ paddingTop: 70 }}>
                     <div className="screen-bounded">
                       <h2>
@@ -448,33 +532,68 @@ class MainPage extends Component {
                         <br />
                         агентство
                       </h2>
-                      <div className="row-group" style={{ gap: 20 }}>
+                      <div
+                        className="row-group"
+                        style={
+                          this.state.mobileSize
+                            ? { flexDirection: "column", gap: 30 }
+                            : { gap: 20 }
+                        }
+                      >
                         <img
                           src={this.state.userComp.logo}
-                          style={{
-                            maxWidth: "calc(50% - 45px)",
-                            height: 70,
-                            objectFit: "contain",
-                            objectPosition: "right",
-                          }}
+                          style={
+                            this.state.mobileSize
+                              ? {
+                                  maxWidth: "80%",
+                                  height: 100,
+                                  objectFit: "contain",
+                                  objectPosition: "right",
+                                }
+                              : {
+                                  maxWidth: "calc(50% - 45px)",
+                                  height: 70,
+                                  objectFit: "contain",
+                                  objectPosition: "right",
+                                }
+                          }
                         ></img>
                         <Heart
-                          style={{
-                            flex: "0 0 30px",
-                            width: 30,
-                            height: 30,
-                            objectFit: "contain",
-                            objectPosition: "center",
-                          }}
+                          style={
+                            this.state.mobileSize
+                              ? {
+                                  flex: "0 0 30px",
+                                  width: 40,
+                                  height: 40,
+                                  objectFit: "contain",
+                                  objectPosition: "center",
+                                }
+                              : {
+                                  flex: "0 0 30px",
+                                  width: 30,
+                                  height: 30,
+                                  objectFit: "contain",
+                                  objectPosition: "center",
+                                }
+                          }
                         />
                         <img
                           src={this.state.userAgency.logo}
-                          style={{
-                            maxWidth: "calc(50% - 45px)",
-                            height: 70,
-                            objectFit: "contain",
-                            objectPosition: "left",
-                          }}
+                          style={
+                            this.state.mobileSize
+                              ? {
+                                  maxWidth: "80%",
+                                  height: 100,
+                                  objectFit: "contain",
+                                  objectPosition: "left",
+                                }
+                              : {
+                                  maxWidth: "calc(50% - 45px)",
+                                  height: 70,
+                                  objectFit: "contain",
+                                  objectPosition: "left",
+                                }
+                          }
                         ></img>
                       </div>
                       <p
@@ -539,7 +658,7 @@ class MainPage extends Component {
                     Версия 2023 года
                   </a> */}
                   <a
-                    href="https://2022.brandhoroscope.ru/"
+                    href="https://t.me/addstickers/brandhoroscope"
                     target="_blank"
                     className="link-button"
                   >

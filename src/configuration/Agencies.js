@@ -15,6 +15,13 @@ const agencies = [
     id: "salt",
   },
   {
+    name: "Wowow Digital",
+    link: "https://wowow.digital/",
+    zodiac: "Козерог",
+    logo: "agency/wowow.png",
+    id: "wowow",
+  },
+  {
     name: "Grape",
     link: "https://grape.ru/ru",
     zodiac: "Водолей",
