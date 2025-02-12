@@ -180,7 +180,11 @@ class MainPage extends Component {
     this.store.dispatch(userDateSelected());
     setTimeout(
       () =>
-        smoothScrollTo(this.state.blockHeight * 1.23, 500, this.ref.current),
+        smoothScrollTo(
+          this.state.blockHeight * (this.state.mobileSize ? 1.23 : 1),
+          500,
+          this.ref.current
+        ),
       200
     );
   }
@@ -203,7 +207,11 @@ class MainPage extends Component {
     this.store.dispatch(userMatchSelected());
     setTimeout(
       () =>
-        smoothScrollTo(this.state.blockHeight * 2.73, 500, this.ref.current),
+        smoothScrollTo(
+          this.state.blockHeight * (this.state.mobileSize ? 2.73 : 2),
+          500,
+          this.ref.current
+        ),
       200
     );
   }
@@ -212,7 +220,11 @@ class MainPage extends Component {
     this.store.dispatch(nextMatchSelected());
     setTimeout(
       () =>
-        smoothScrollTo(this.state.blockHeight * 2.73, 500, this.ref.current),
+        smoothScrollTo(
+          this.state.blockHeight * (this.state.mobileSize ? 2.73 : 2),
+          500,
+          this.ref.current
+        ),
       200
     );
   }

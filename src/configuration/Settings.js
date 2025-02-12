@@ -10,7 +10,7 @@ const settings = {
   isMobile: isMobile(),
   isLocal: isLocal(),
 
-  rootURL: "https://mediasmit.tmweb.ru/testpage/bh6/",
+  rootURL: "https://brandhoroscope.ru/",
 
   zodiac: [
     { name: "Козерог", start: [1, 1], end: [20, 1] },
